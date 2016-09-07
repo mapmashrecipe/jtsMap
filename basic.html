@@ -5,8 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=7, IE=9, IE=10">
     <meta name="viewport" content="initial-scale=1, maximum-scale=1,user-scalable=no" />
     <title></title>
-    <script src="js/jquery-min-1.11.1.js"></script>
-	<link rel="stylesheet" href="js/leaflet.css" />
+	<link rel="stylesheet" href="css/leaflet.css" />
 	<link rel="stylesheet" href="css/l.geosearch.css" />
     <style>
 	body{
@@ -24,8 +23,7 @@
 </head>
 <body>
     <div id="map"></div>    
-	<button id="searchIcon" class="btn btn-default" type="button" onclick="searchOpen();" data-toggle="tooltip" data-placement="bottom" title="Find stops within 500 ft."><img src="images/glyphicons-28-search_16.png" alt="search"/></button>  
-	<div id="stopListG"></div>
+    <script src="js/jquery-min-1.11.1.js"></script>
 	<script src="js/leaflet.js"></script>
     <script type="text/javascript">
     	function gup( name ){  
@@ -41,7 +39,7 @@
 
 	
 	
-var map
+var map;
 		
 $(document).ready(function () {	
 
@@ -54,13 +52,19 @@ $(document).ready(function () {
 	
 		console.log(latlng);
 		
-	map = L.map('map').setView(latlng, 12);
+	map = L.map('map', {zoomControl:false}).setView(latlng, 12);
+	
 	L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
 		attribution: '&copy; <a href="http://openstreetmap.org">OpenStreetMap</a>',
 		maxZoom: 18
 	}).addTo(map);
 	
-	var marker = L.marker(latlng).addTo(map);
+	var p = L.icon({
+        iconUrl: "images/blue16.png",
+        iconSize: [18, 18],
+        iconAnchor: [9, 9]
+    });
+	var marker = L.marker(latlng, {icon: p}).addTo(map);
 	
 });
 
